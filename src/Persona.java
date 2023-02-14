@@ -144,9 +144,16 @@ public abstract class Persona {
 			mensajes.append(iterator.next() + "\n");
 		}
 		return mensajes.toString();
-	}	
-	
-	
+	}
+
+	/**
+	 * Método con el que buscamos un mensaje dentro del linkdlist recorriendo el linkedlist con un foreach.
+	 * Si ese mensaje contiene el texto que es un string entonces devolveremos el mensaje como un string, si no
+	 * devolvemos una excepción.
+	 * @param texto
+	 * @return
+	 * @throws IESException
+	 */
 	public String buscarMensajesConTexto( String texto) throws IESException{
 		StringBuilder msg = new StringBuilder();
 		for(Mensaje mensaje: mensajes){
