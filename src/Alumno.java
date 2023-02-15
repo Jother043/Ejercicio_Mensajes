@@ -57,13 +57,13 @@ public class Alumno extends Persona {
     }
 
 
-    public void enviarCorreo(String msg, Persona personaDestinatario) throws IESException {
+    public void enviarCorreo(String message, Persona personaDestinatario) throws IESException {
 
         if (this.getEdad() < 18 && personaDestinatario instanceof Alumno) {
             throw new IESException("El alumno no puede enviar un mensaje a otro alumno siendo menor de edad");
         }
 
-        super.enviarCorreo(msg, personaDestinatario);
+        super.enviarCorreo(message, personaDestinatario);
     }
 
 

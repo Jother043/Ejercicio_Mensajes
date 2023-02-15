@@ -78,13 +78,13 @@ public abstract class Persona {
 
 	/**
 	 * Método con el que enviamos un mensaje, utilizando el método add de la Interfaz collection
-	 * @param msg
+	 * @param message
 	 * @param personaDestinatario
 	 * @throws IESException
 	 */
-	public void enviarCorreo(String msg, Persona personaDestinatario) throws IESException{
+	public void enviarCorreo(String message, Persona personaDestinatario) throws IESException{
 		
-		Mensaje mensaje = new Mensaje(personaDestinatario, msg);
+		Mensaje mensaje = new Mensaje(personaDestinatario, message);
 
 		personaDestinatario.mensajes.add(mensaje);
 	}
@@ -134,7 +134,7 @@ public abstract class Persona {
 		mensajes.sort(new Comparator<Mensaje>() {
 			@Override
 			public int compare(Mensaje o1, Mensaje o2) {
-				return o1.getRemitente().getNombre().compareTo(o2.getRemitente().getNombre());
+				return o1.getTexto().compareTo(o2.getTexto());
 			}
 		});
 
@@ -156,11 +156,14 @@ public abstract class Persona {
 	 */
 	public String buscarMensajesConTexto( String texto) throws IESException{
 		StringBuilder msg = new StringBuilder();
+		int count = 0;
 		for(Mensaje mensaje: mensajes){
+			count ++;
 			if(mensaje.getTexto().contains(texto)){
-				msg.append(mensaje.toString());
-			}else {
-				throw new IESException("No existe ningún mensaje con ese texto");
+				msg.append(mensaje);
+				break;
+			}else if(count == mensajes.size() && msg.toString().trim().isEmpty()){
+				throw new IESException("No se encuentra el mensaje buscado: " + texto);
 			}
 		}
 		return msg.toString();
