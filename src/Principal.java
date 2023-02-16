@@ -14,10 +14,15 @@ public class Principal {
 			profesor1.enviarCorreo("Adios", profesor2);
 			profesor3.enviarCorreo("Hola como estas", profesor2);
 			profesor3.enviarCorreo("Calle baja", profesor2);
-			
+			System.out.println(profesor2.mostrarMensajes());
+			System.out.println("1. Ordenado lista por orden alfabético de mensajes...");
 			System.out.println(profesor2.mostrarMensajesOrdenados());
+			System.out.println("2. Ordenado lista por orden alfabético de mensajes...");
+			System.out.println(profesor2.mostrarMensajesOrdenados2());
+			System.out.println("3. Ordenado lista por orden alfabético de mensajes...");
+			System.out.println(profesor2.mostrarMensajesOrdenados3());
 
-			System.out.println("El mensaje buscado es : " + profesor2.buscarMensajesConTexto("Calle baja"));
+			System.out.println("El mensaje buscado es : " + profesor2.buscarMensajesConTexto(" "));
 		} catch (IESException e) {
 			System.err.println(e.getMessage());
 		}

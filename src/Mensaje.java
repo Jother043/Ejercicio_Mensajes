@@ -2,7 +2,7 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Mensaje  {
+public class Mensaje  implements Comparable<Mensaje>{
 	private Persona remitente;
 	private String texto;
 	private LocalDateTime hora;
@@ -34,13 +34,9 @@ public class Mensaje  {
 		return "Mensaje De: " + remitente.getNombre() + " Texto: " + texto + ", Fecha " + df.format( hora );
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+	@Override
+	public int compareTo(Mensaje o) {
+		return this.getTexto().compareTo(o.getTexto());
+	}
 }

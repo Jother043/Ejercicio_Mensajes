@@ -1,8 +1,5 @@
 
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public abstract class Persona {
 	
@@ -145,6 +142,41 @@ public abstract class Persona {
 		}
 		return mensajes.toString();
 	}
+	public String mostrarMensajesOrdenados2()throws IESException{
+		if(mensajes.size() == 0){
+			throw new IESException("No hay mensajes para mostrar");
+		}
+
+		/*
+		 * Podemos sustituir la clase interna, compare por la siguiente expresión lambda
+		 */
+		mensajes.sort((o1, o2) -> o1.getTexto().compareTo(o2.getTexto()));
+
+		Iterator<Mensaje> iterator = mensajes.iterator();
+		StringBuilder mensajes = new StringBuilder();
+		while (iterator.hasNext()){
+			mensajes.append(iterator.next() + "\n");
+		}
+		return mensajes.toString();
+	}
+
+	/**
+	 * Utilizando la interfaz comparable en la clase mensaje podemos ordenar también utilizando en el método compareTo
+	 * @return
+	 * @throws IESException
+	 */
+	public String mostrarMensajesOrdenados3()throws IESException{
+		if(mensajes.size() == 0){
+			throw new IESException("No hay mensajes para mostrar");
+		}
+		Collections.sort(mensajes);
+		Iterator<Mensaje> iterator = mensajes.iterator();
+		StringBuilder mensajes = new StringBuilder();
+		while (iterator.hasNext()){
+			mensajes.append(iterator.next() + "\n");
+		}
+		return mensajes.toString();
+	}
 
 	/**
 	 * Método con el que buscamos un mensaje dentro del linkdlist recorriendo el linkedlist con un foreach.
@@ -156,15 +188,14 @@ public abstract class Persona {
 	 */
 	public String buscarMensajesConTexto( String texto) throws IESException{
 		StringBuilder msg = new StringBuilder();
-		int count = 0;
 		for(Mensaje mensaje: mensajes){
-			count ++;
 			if(mensaje.getTexto().contains(texto)){
 				msg.append(mensaje);
 				break;
-			}else if(count == mensajes.size() && msg.toString().trim().isEmpty()){
-				throw new IESException("No se encuentra el mensaje buscado: " + texto);
 			}
+		}
+		if(msg.toString().trim().isEmpty()){
+			throw new IESException("No se encuentra el mensaje buscado: " + texto);
 		}
 		return msg.toString();
 	}
